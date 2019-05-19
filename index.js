@@ -41,10 +41,19 @@ function removeItem(e) {
 }
 
 //filter through the list of items to find what you want
+filter.addEventListener('keyup', filterItems);
 function filterItems(e) {
-  let li = itemList.querySelectorAll('li');
-  for (let i=0; i < li.length; i++) {
-    if (li.textContent
-  }
-
+  let text = e.target.value;
+  let items = itemList.getElementsByTagName('li');
+  //creates array of li and loop through the array
+  Array.from(items).forEach(function(item){
+    //for each item in items, you get the textContent
+    let itemName = item.firstChild.textContent; //in this case, one item is one li and firstChild would be the 
+    //if it's not equal to -1, then it is a match
+    if(itemName.indexOf(text) != -1) {
+      item.style.display = 'block'; //show item as a block if it matches
+    } else {
+      item.style.display = 'none'; //hides if it doesnt match
+    }
+  })
 }
